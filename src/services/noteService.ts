@@ -19,12 +19,12 @@ interface FetchNotesResponse {
 }
 
 export const fetchNotes = async (
-  query: string,
+  search: string,
   page: number,
 ): Promise<FetchNotesResponse> => {
   const res = await api.get<FetchNotesResponse>(`/notes`, {
     params: {
-      query,
+      search,
       page,
       perPage: PER_PAGE,
     },

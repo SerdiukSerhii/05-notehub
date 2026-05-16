@@ -21,12 +21,15 @@ function App() {
   });
 
   const totalPages = data?.totalPages ?? 0;
+  const notes = data?.notes ?? [];
 
+  // Відкладене оновлення пошукового запиту
   const handleSearch = useDebouncedCallback((newSearchValue: string) => {
     setSearchQuery(newSearchValue);
     setCurrentPage(1);
   }, 300);
 
+  // Обробка введення тексту в SearchBox
   const onSearchChange = (newSearchValue: string) => {
     handleSearch(newSearchValue);
   };
@@ -47,8 +50,6 @@ function App() {
           />
         )}
 
-        {/* Кнопка створення нотатки */}
-
         <button
           onClick={() => setIsModalOpen(true)}
           className={css.button}
@@ -60,7 +61,7 @@ function App() {
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
 
-      <NoteList />
+      {NoteList.length > 0 && <NoteList notes={notes} />}
 
       {isModalOpen && (
         <Modal onClose={() => setIsModalOpen(false)}>

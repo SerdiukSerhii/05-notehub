@@ -4,7 +4,7 @@ import css from './Modal.module.css';
 
 interface ModalProps {
   onClose: () => void;
-  children?: React.ReactNode;
+  children: React.ReactNode;
 }
 
 const Modal = ({ onClose, children }: ModalProps) => {

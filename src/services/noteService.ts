@@ -11,7 +11,7 @@ const api = axios.create({
   },
 });
 
-interface NotesResponse {
+interface FetchNotesResponse {
   results: Note[];
   total_pages: number;
 }
@@ -19,8 +19,8 @@ interface NotesResponse {
 export const fetchNotes = async (
   query: string,
   page: number,
-): Promise<NotesResponse> => {
-  const res = await api.get<NotesResponse>(`/notes`, {
+): Promise<FetchNotesResponse> => {
+  const res = await api.get<FetchNotesResponse>(`/notes`, {
     params: {
       query,
       page,

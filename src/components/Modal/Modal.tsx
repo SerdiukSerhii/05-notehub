@@ -7,7 +7,7 @@ interface ModalProps {
   children?: React.ReactNode;
 }
 
-export default function Modal({ onClose, children }: ModalProps) {
+const Modal = ({ onClose, children }: ModalProps) => {
   // --------------Закриття ESC----------------
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -56,4 +56,6 @@ export default function Modal({ onClose, children }: ModalProps) {
     </div>,
     document.getElementById('modal-root') as HTMLDivElement,
   );
-}
+};
+
+export default Modal;

@@ -11,9 +11,11 @@ const api = axios.create({
   },
 });
 
+const PER_PAGE = 12;
+
 interface FetchNotesResponse {
-  results: Note[];
-  total_pages: number;
+  notes: Note[];
+  totalPages: number;
 }
 
 export const fetchNotes = async (
@@ -24,6 +26,7 @@ export const fetchNotes = async (
     params: {
       query,
       page,
+      perPage: PER_PAGE,
     },
   });
 

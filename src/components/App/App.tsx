@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDebouncedCallback } from 'use-debounce';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { fetchNotes, createNote } from '../../services/noteService';
+import { fetchNotes, createNote, deleteNote } from '../../services/noteService';
 import type { NewNoteBody } from '../../types/note';
 import Modal from '../Modal/Modal';
 import NoteList from '../NoteList/NoteList';
@@ -47,6 +47,17 @@ function App() {
     addNote(values);
   };
 
+  const { mutate: removeNote } = useMutation({
+    mutationFn: deleteNote,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['notes'] });
+    },
+  });
+
+  const handleDeleteNote = (id: string) => {
+    removeNote(id);
+  };
+
   return (
     <div className={css.app}>
       <header className={css.toolbar}>
@@ -74,7 +85,12 @@ function App() {
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
 
-      {notes.length > 0 && <NoteList notes={notes} />}
+      {notes.length > 0 && (
+        <NoteList
+          notes={notes}
+          onDelete={handleDeleteNote}
+        />
+      )}
 
       {isModalOpen && (
         <Modal onClose={() => setIsModalOpen(false)}>

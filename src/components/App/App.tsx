@@ -27,10 +27,11 @@ function App() {
   const totalPages = data?.totalPages ?? 0;
   const notes = data?.notes ?? [];
 
+  // ----------Оновлює пошук і скидає сторінку на першу----------
   const handleSearch = useDebouncedCallback((newSearchValue: string) => {
     setSearchQuery(newSearchValue);
     setCurrentPage(1);
-  }, 300);
+  }, 500);
 
   return (
     <div className={css.app}>

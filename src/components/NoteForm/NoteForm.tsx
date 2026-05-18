@@ -5,6 +5,7 @@ import { createNote } from '../../services/noteService';
 import type { NewNoteBody, NoteTag } from '../../types/note';
 import css from './NoteForm.module.css';
 
+// ----------- Валідація----------
 const validationSchema = Yup.object({
   title: Yup.string()
     .min(3, 'Minimum 3 characters')
@@ -44,7 +45,7 @@ const NoteForm = ({ onClose }: NoteFormProps) => {
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={values => mutate(values)}
+      onSubmit={(values: NewNoteBody) => mutate(values)}
     >
       <Form className={css.form}>
         <div className={css.formGroup}>
